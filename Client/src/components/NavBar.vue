@@ -11,8 +11,8 @@ const isOpen = ref(false);//initializing the ref to false
       <div class="navbar-brand">
         <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="30" height="30" />
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" 
-          :class="{ 'is-active': isOpen}" @click="isOpen = !isOpen"><!--toggle the value of isOpen-->
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+           :class="{ 'is-active': isOpen }" @click="isOpen = !isOpen">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -20,10 +20,11 @@ const isOpen = ref(false);//initializing the ref to false
         </a>
       </div>
 
-      <div class="navbar-menu" :class="{ 'is-active': isOpen}">
+      <div class="navbar-menu" :class="{ 'is-active': isOpen }">
         <div class="navbar-start">
           <RouterLink to="/" class="navbar-item">Home</RouterLink>
-          <RouterLink to="/about" class="navbar-item">About</RouterLink>
+          <RouterLink to="/products" class="navbar-item">Shop</RouterLink>
+
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
@@ -54,7 +55,9 @@ const isOpen = ref(false);//initializing the ref to false
               <a class="button is-primary">
                 <strong>Sign up</strong>
               </a>
-              <a class="button is-light"> Log in </a>
+              <a class="button is-light">
+                Log in
+              </a>
             </div>
           </div>
         </div>
@@ -68,4 +71,5 @@ const isOpen = ref(false);//initializing the ref to false
 
   font-weight: bold;
   border-bottom: 2px solid blue;
-}</style>
+}
+</style>

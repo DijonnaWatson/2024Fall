@@ -6,7 +6,7 @@ export interface DataEnvelope<T> {
     error?: string;
 }
 
-export interface DataListEnvelope<T> {
+export interface DataListEnvelope<T> extends DataEnvelope<T[]> {
   data: T[]
   total: number
   error?: string
