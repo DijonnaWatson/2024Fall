@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router'
+import FlyoutPanel from './FlyoutPanel.vue';
+import ShoppingCart from './ShoppingCart.vue';
 
 const isOpen = ref(false);//initializing the ref to false
+const isCartOpen = ref(false)
 </script>
 
 <template>
@@ -58,12 +61,21 @@ const isOpen = ref(false);//initializing the ref to false
               <a class="button is-light">
                 Log in
               </a>
+              <button class="button is-warning is-light is-active" :class="{ 'is-focused': isCartOpen }"
+                      @click="isCartOpen = !isCartOpen">
+                <span class="icon">
+                  <i class="fas fa-shopping-cart"></i>
+                </span>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </nav>
+  <FlyoutPanel :is-open="isCartOpen">
+    <ShoppingCart />
+  </FlyoutPanel>
 </template>
 
 <style scoped>

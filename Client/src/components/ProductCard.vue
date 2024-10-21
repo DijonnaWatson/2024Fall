@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { Product } from '@/models/products';
+import { addToCart } from '@/models/shoppingCart';
 
 const props = defineProps<{
     product: Product
 }>()
-//we never change the prodcuts
-const {product} = props
+//we never change the products
+const { product } = props
 </script>
 
 <template>
@@ -15,10 +16,10 @@ const {product} = props
         </div>
         <div class="box-content">
             <h3>{{ product.title }}</h3>
-             <i>{{ product.brand }}</i>
+            <i>{{ product.brand }}</i>
             <p>{{ product.description }}</p>
             <p class="price">${{ product.price }}</p>
-            <button class="button is-success">Add to cart</button>
+            <button class="button is-success" @click="addToCart(product)">Add to Cart</button>
         </div>
     </div>
 </template>
@@ -27,13 +28,15 @@ const {product} = props
 h3 {
     font-weight: bold;
 }
-i{
-    color:#888;
+
+i {
+    color: #888;
 }
-.price{
+
+.price {
+    color: chocolate;
+    font-size: 2em;
     font-weight: bold;
-    font-size: 2.5em;
     float: right;
-    color:chocolate;
 }
 </style>
