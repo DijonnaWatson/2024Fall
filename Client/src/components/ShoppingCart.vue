@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { refCart, count, total } from '@/models/shoppingCart';
+import { refCart, count, total, removeFromCart } from '@/models/shoppingCart';
 
 
 const cart = refCart()
@@ -14,13 +14,24 @@ const cart = refCart()
             <p>Your cart is empty</p>
         </div>
         <div v-else>
-            <div v-for="item in cart" :key="item.product.id">
-                <div>{{ item.product.title }}</div>
-                <div>{{ item.product.price }}</div>
-                <div>{{ item.quantity }}</div>
+            <div v-for="item in cart" :key="item.product.id" class="item">
+                <img :src="item.product.thumbnail" :alt="item.product.title" />
+                <button @click="removeFromCart(item.product)" style="float:right;">
+                    <i class="fas fa-trash has-text-danger"></i>
+                </button>
+                <h3>{{ item.product.title }}</h3>
+
+                <div>
+                    ${{ item.product.price }} x 
+                    <select v-model="item.quantity">
+                        <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+                    </select>
+                     = 
+                     ${{ item.product.price * item.quantity }}
+                </div>
             </div>
             <div>
-                <p>Total: {{ count }} items = ${{ total }}</p>
+                <h3>Total: {{ count }} items = ${{ total }}</h3>
             </div>
         </div>
 
@@ -28,7 +39,21 @@ const cart = refCart()
 </template>
 
 <style scoped>
+.h3{
+    font-weight: bold;
+}
 .cart {
     padding: 1rem;
+    overflow-y: auto;
+}
+.cart img {
+    width: 50px;
+    height: 50px;
+    float:left;
+}
+.item{
+    padding-bottom:.5em;
+    margin-bottom: .5em;
+    border-bottom: risge 1px solid #ccc;
 }
 </style>
