@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: built vue
-        run: 
+        run: |
            cd Client 
            npm install
            npm run build
