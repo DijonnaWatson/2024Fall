@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node server/index.mjs",
-    "dev": "nodemon server/index.mjs"
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js --watch server" 
   },
   "dependencies": {
     "express":"^4.21.0",
