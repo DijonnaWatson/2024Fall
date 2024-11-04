@@ -15,4 +15,13 @@ MyHeader: MyValue
 }
 
 ###
-http://localhost:3000
+GET http://localhost:3000/about
+
+###
+GET http://localhost:3000/users
+
+###
+GET http://localhost:3000/users/30
+
+###
+GET http://localhost:3000/users/1
