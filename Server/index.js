@@ -17,5 +17,5 @@ compiler (can't figure out if they're right or if they're wrong)
  and computer don't know what the number means 
  the number should just be a CONSTANT obviously */
 app.listen(PORT, () => {
-    console.log("Server is running at http://locolhost:"+ PORT)
+    console.log("Server is running at http://localhost:"+ PORT)
 })
