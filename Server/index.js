@@ -15,11 +15,12 @@ const PORT= 3000;
 /*registering an action in the pipeline, when a message comes in with the get function and the appl equals "/" which means nothing, than execute this function*/
 /*param one is all info about req, param 2 obj with all methods need to create a most basic response */
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello World")
 })
     .get("/about", (req, res) => {
         res.send("About Us");
-    }).use("/users", userController);/**/
+    })
+    .use("/users", userController)
 
 
 /*This is an Asynchronous function.Once pipeline is set up, last thing to do is listen? 
@@ -28,5 +29,5 @@ compiler (can't figure out if they're right or if they're wrong)
  and computer don't know what the number means 
  the number should just be a CONSTANT obviously */
 app.listen(PORT, () => {
-    console.log("Server is running at http://localhost:"+ PORT)
+    console.log("Server is running at http://localhost:" + PORT)
 })
