@@ -5,36 +5,32 @@ const app = express.Router();/*almost axactly the same as the default we get fro
 
 app.get("/", (req, res) => {
     //user response obj to send 
-    res.send(data.items)
+    res.send(model.getAll())
 })
 
 /*make a locol variable id that points to the */
 .get("/:id", (req, res) => {
-    const id = req.params.id
-    const user = data.items.find(u => u.id === id)/*find calls this function once for every item in items */
-    res.send(user)
+  const id = req.params.id;
+  const user =
+    model.get(id); /*find calls this function once for every item in items */
+  res.send(user);
 })
 
 .post("/", (req, res) => {
-    const user = req.body
-    user.id = data.items.reduce((prev, x) => (x.id > prev ? x.id: prev),0) + 1
-    data.items.push(user);
-    res.send(user)
+    const user = model.add(req.body);
+    res.send(user);
 })
 
 .patch("/:id", (req, res) => {
-    const id = req.params.id
-    const user = data.items.find(u => u.id === id)
-    Object.assign(user, req.body)
-    res.send(user)
+    const id = req.params.id;
+    const user = model.update(id, req.body);
+    res.send(user);
 })
+
 .delete("/:id", (req, res) => {
-    const id = req.params.id
-    const userIndex = data.items.findIndex(u => u.id === id)
-    data.items.splice(userIndex, 1);
-    res.send({
-        message: "User deleted successfully"
-    })
+    const id = req.params.id;
+    const ret = model.remove(id);
+    res.send(ret);
 })
 
 /*after added these possible finctions, we need to export them, and will be able to import them in the
