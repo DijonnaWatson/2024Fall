@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "checkJs": true,
-        "resolveJsonModule": true
-    }
+  "compilerOptions": {
+    "checkJs": true,
+    "resolveJsonModule": true
+  }
 }

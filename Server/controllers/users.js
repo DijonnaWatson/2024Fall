@@ -11,8 +11,7 @@ app.get("/", (req, res) => {
 /*make a locol variable id that points to the */
 .get("/:id", (req, res) => {
   const id = req.params.id;
-  const user =
-    model.get(+id); /*find calls this function once for every item in items */
+  const user = model.get(+id); /*find calls this function once for every item in items */
   res.send(user);
 })
 
@@ -23,13 +22,13 @@ app.get("/", (req, res) => {
 
 .patch("/:id", (req, res) => {
     const id = req.params.id;
-    const user = model.update(id, req.body);
+    const user = model.update(+id, req.body);
     res.send(user);
 })
 
 .delete("/:id", (req, res) => {
     const id = req.params.id;
-    const ret = model.remove(id);
+    const ret = model.remove(+id);
     res.send(ret);
 })
 

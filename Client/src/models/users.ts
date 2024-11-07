@@ -1,16 +1,27 @@
-export Class User {
-    id?: number
-    firstName: string = ''
-    lastName: string = ''
-    email: string = ''
-    phone: string = ''
-    password: string = ''
-    birthday: string = ''
-    image: string = ''
-    address{
-        street: string = ''
-        city: string = ''
-        state: string = ''
-        zip: string = ''
-    }
+
+export class User {
+  id?: number
+  firstName: string = ''
+  lastName: string = ''
+  email: string = ''
+  phone: string = ''
+  password: string = ''
+  birthDate: string = ''
+  image: string = ''
+  address: {
+    address: string
+    city: string
+    state: string
+    stateCode: string
+    postalCode: string
+    country: string
+  } = {
+    address: '',
+    city: '',
+    state: '',
+    stateCode: '',
+    postalCode: '',
+    country: 'United States'
+  }
+  role: string = 'admin'
 }

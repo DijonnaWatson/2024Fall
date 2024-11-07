@@ -18,14 +18,15 @@ app.use(express.static(__dirname +"/dist"))//Static, is a middleware that takes 
 /*most basic one is getting without a path*/
 /*registering an action in the pipeline, when a message comes in with the get function and the appl equals "/" which means nothing, than execute this function*/
 /*param one is all info about req, param 2 obj with all methods need to create a most basic response */
-app.get("/", (req, res) => {
+app
+  .get("/", (req, res) => {
     res.send("Hello World");
-})
+  })
   .get("/about", (req, res) => {
     res.send("About Us");
   })
   .use("/users", userController)
-  .use("/products", productController)
+  .use("/products", productController);
 
 
 /*This is an Asynchronous function.Once pipeline is set up, last thing to do is listen? 
