@@ -1,5 +1,5 @@
 /*the . means it's one of our files */
-const data = require('../data/model/users');
+const data = require('../model/users');
 const express = require('express');
 const app = express.Router();/*almost axactly the same as the default we get from the express function, */
 

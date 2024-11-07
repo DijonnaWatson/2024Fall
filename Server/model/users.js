@@ -2,12 +2,20 @@
  using ecxpress, should be pure JavaScript that only knows 
  where it's getting the data from */
 
+ /**@type {{items: User[]}} */
  const data = require('../data/users.json');
 
+/** *
+* @typedef {import("../../Client/src/models/users").User }User
+ */
  function getAll() {
      return data.items;
  }
-
+/**
+ * 
+ * @param {number} id 
+ * @returns 
+ */
  function get(id){
     return data.items.find((user) => user.id == id)
  }
@@ -25,7 +33,7 @@
  }
 
  function update(id, user) {
-   const userToUpdate = data.items.find((user) => user.id == id);
+   const userToUpdate = get(id);
    Object.assign(userToUpdate, user);
    return userToUpdate;
  }
