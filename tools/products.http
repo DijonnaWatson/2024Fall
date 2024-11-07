@@ -1,0 +1,48 @@
+###
+GET https://google.com
+
+###
+POST https://dummyjson.com/products/add
+MyHeader: MyValue
+
+{
+    "title": "Green Lip Stick",
+    "price": 12.99,
+    "description": "This is a green lip stick",
+    "image": "https://dummyimage.com/300x300.jpg"
+    
+
+}
+
+###
+GET http://localhost:3000/about
+
+###
+GET http://localhost:3000/users
+
+###
+GET http://localhost:3000/users/30
+
+###
+DELETE http://localhost:3000/users/1
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "title": "Delivery Drone",
+    "price": 1000,
+    "description": "This is a delivery drone",
+    "thumbnail": "https://dummyimage.com/300x300.jpg",
+    "category": "drones"
+}
+
+###
+PATCH http://localhost:3000/products/31
+Content-Type: application/json
+
+{
+    "price": 1100,
+    "descirption": "This is a delivery drone"
+}

@@ -4,23 +4,28 @@ since express doesn't start with a "." it will lok for it in the node module fol
 const express = require("express");
 const app = express();/*create instance of the express pipeline, everytime a message comes in to the port, the operating system gives the message to express and express goes to find out which function it should run*/
 const userController = require("./controllers/users");
-
+const productController = require("./controllers/products");
 
 
 const PORT= 3000;
 
+//Middleware
+app.use(express.json())
+app.use(express.static(__dirname +"/dist"))//Static, is a middleware that takes a look at every request, way to make an actual web server
 
+//Controllers
 
 /*most basic one is getting without a path*/
 /*registering an action in the pipeline, when a message comes in with the get function and the appl equals "/" which means nothing, than execute this function*/
 /*param one is all info about req, param 2 obj with all methods need to create a most basic response */
 app.get("/", (req, res) => {
-  res.send("Hello World")
+    res.send("Hello World");
 })
-    .get("/about", (req, res) => {
-        res.send("About Us");
-    })
-    .use("/users", userController)
+  .get("/about", (req, res) => {
+    res.send("About Us");
+  })
+  .use("/users", userController)
+  .use("/products", productController)
 
 
 /*This is an Asynchronous function.Once pipeline is set up, last thing to do is listen? 

@@ -1,7 +1,17 @@
-/*the . means it's one of our files */
-const model = require('../model/users');
-const express = require('express');
-const app = express.Router();/*almost axactly the same as the default we get from the express function, */
+/*Not using express, model should never know it's
+ using ecxpress, should be pure JavaScript that only knows 
+ where it's getting the data from */
+
+
+ const model = require('../data/products.json');
+ const express = require("express");
+ const app = express.Router()
+/*4 ways to send data to the Server
+1. Query string
+2. URL/Path Parameters
+3. Headers 
+4. Body-access body of request
+*/
 
 app.get("/", (req, res) => {
     //user response obj to send 
@@ -12,7 +22,7 @@ app.get("/", (req, res) => {
 .get("/:id", (req, res) => {
   const id = req.params.id;
   const user =
-    model.get(+id); /*find calls this function once for every item in items */
+    model.get(id); /*find calls this function once for every item in items */
   res.send(user);
 })
 

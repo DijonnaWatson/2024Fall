@@ -22,4 +22,7 @@ export default defineConfig({
     }
   },
   base: './',
+  build:{
+    outDir: '../Server/dist'
+  }
 })
