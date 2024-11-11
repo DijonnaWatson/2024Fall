@@ -40,3 +40,11 @@ compiler (can't figure out if they're right or if they're wrong)
 app.listen(PORT, () => {
     console.log("Server is running at http://localhost:" + PORT)
 })
+
+/* Four types of async methods
+  1.Node Style Callbacks
+  2.Pipelines
+  3.Promises
+  4,Async/Await
+
+*/
