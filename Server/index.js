@@ -25,9 +25,12 @@ app
   .get("/about", (req, res) => {
     res.send("About Us");
   })
-  .use("/users", userController)
-  .use("/products", productController);
+  .use("/api/v1/users", userController)
+  .use("/api/v1/products", productController)
 
+  .get("*", (req, res) => {
+    res.sendFile(__dirname + "/dist/index.html")//asking for any resource and not handled by anything, just give it index.html
+  })
 
 /*This is an Asynchronous function.Once pipeline is set up, last thing to do is listen? 
 anytime see num in the middle of the code its a magin num
