@@ -11,9 +11,9 @@ const data = require("../data/products.json")
 
 /**
  * Get all users
- * @returns {Product[]}
+ * @returns {Promise<Product[]>}
  */
-function getAll() {
+async function getAll() {
     return data.items
 }
 
@@ -56,6 +56,8 @@ function update(id, user) {
  */
 function remove(id) {
     const itemIndex = data.items.findIndex((user) => user.id == id)
+    if(itemIndex == -1) {
+        return { success: false, message: "Item not found", id: id }
     data.items.splice(itemIndex, 1)
     return { success: true, message: "Item deleted", id: id }
 }

@@ -14,12 +14,12 @@
 */
 
 app
-  .get("/", (req, res) => {
+  .get("/", (req, res, next) => {
     res.send(model.getAll());
   })
 
   /*make a locol variable id that points to the */
-  .get("/:id", (req, res) => {
+  .get("/:id", (req, res, next) => {
     const id = req.params.id;
     const user = model.get(
       +id
@@ -27,20 +27,24 @@ app
     res.send(user);
   })
 
-  .post("/", (req, res) => {
+  .post("/", (req, res, next) => {
     const user = model.add(req.body);
     res.send(user);
   })
 
-  .patch("/:id", (req, res) => {
+  .patch("/:id", (req, res, next) => {
     const id = req.params.id;
     const user = model.update(+id, req.body);
     res.send(user);
   })
 
-  .delete("/:id", (req, res) => {
+  .delete("/:id", (req, res, next) => {
     const id = req.params.id;
     const ret = model.remove(+id);
+    if(!ret){
+      next({message: "Product not found", status: 404})
+      return
+    }
     res.send(ret);
   });
 

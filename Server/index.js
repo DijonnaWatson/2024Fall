@@ -19,7 +19,7 @@ app.use(express.static(__dirname +"/dist"))//Static, is a middleware that takes 
 /*registering an action in the pipeline, when a message comes in with the get function and the appl equals "/" which means nothing, than execute this function*/
 /*param one is all info about req, param 2 obj with all methods need to create a most basic response */
 app
-  .get("/", (req, res) => {
+  .get("/", (req, res, next) => {
     res.send("Hello World");
   })
   .get("/about", (req, res) => {
@@ -28,7 +28,7 @@ app
   .use("/api/v1/users", userController)
   .use("/api/v1/products", productController)
 
-  .get("*", (req, res) => {
+  .get("*", (req, res, next) => {
     res.sendFile(__dirname + "/dist/index.html")//asking for any resource and not handled by anything, just give it index.html
   })
 
@@ -37,9 +37,13 @@ anytime see num in the middle of the code its a magin num
 compiler (can't figure out if they're right or if they're wrong)
  and computer don't know what the number means 
  the number should just be a CONSTANT obviously */
-app.listen(PORT, () => {
+ console.log("Step #1")
+app.listen(PORT, (err,data) => {
+
+  console.log("Step #2")
     console.log("Server is running at http://localhost:" + PORT)
 })
+console.log("Step #3")
 
 /* Four types of async methods
   1.Node Style Callbacks
