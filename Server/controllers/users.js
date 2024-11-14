@@ -12,9 +12,7 @@ app
   /*make a locol variable id that points to the */
   .get("/:id", (req, res, next) => {
     const id = req.params.id;
-    const user = model.get(
-      +id
-    ); /*find calls this function once for every item in items */
+    const user = model.get(+id); /*find calls this function once for every item in items */
     res.send(user);
   })
 
