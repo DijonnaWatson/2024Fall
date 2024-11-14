@@ -1,11 +1,10 @@
 import data from '../data/products.json'
 import type { DataListEnvelope } from './dataEnvelope'
+import { rest } from './myFetch'
+
 //fucntion that returns this objects, the items(30) and the total(theoretically number of items total)
-export function getAll(): DataListEnvelope<Product> {
-  return {
-    data: data.items,
-    total: data.total
-  } //return an object
+export function getAll() {
+  return rest<DataListEnvelope<Product>>('/api/products') //return an object
 }
 
 interface Review {

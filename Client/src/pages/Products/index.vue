@@ -4,7 +4,10 @@ import { getAll, type Product } from '@/models/products';
 import ProductCard from '@/components/ProductCard.vue';
 
 const products = ref<Product[]>([]);
-products.value = getAll().data
+// products.value = getAll().data //after get ALl need to put in product.value
+getAll().then((data) => {
+    products.value = data;
+});
 
 </script>
 

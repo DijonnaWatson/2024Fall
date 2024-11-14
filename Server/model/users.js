@@ -5,20 +5,38 @@
  /**@type {{items: User[]}} */
  const data = require('../data/users.json');
 
+/**
+ * @typedef {import("../../Client/src/models/dataEnvelope").DataEnvelope} DataEnvelope
+ * @typedef {import("../../Client/src/models/dataEnvelope").DataListEnvelope} DataListEnvelope
+ */
+
 /** *
 * @typedef {import("../../Client/src/models/users").User }User
  */
+
+/**
+ * Get all users
+ * @returns {Promise<DataListEnvelope<Product>>}
+ */
  function getAll() {
-     return data.items;
+     return {
+       isSuccess: true,
+       data: data.items,
+       total: data.items.length,
+     };
  }
 /**
- * 
- * @param {number} id 
- * @returns 
+ * Get a user by id
+ * @param {number} id
+ * @returns {Promise<DataEnvelope<Product>>}
  */
- function get(id){
-    return data.items.find((user) => user.id == id)
- }
+async function get(id) {
+    const data.items.find((user) => user.id == id)
+    return{
+        isSuccess: !!item,
+        data: item,
+    }
+}
 
  function add(user){
     user.id =  data.items.reduce((prev, x) => (x.id > prev ? x.id: prev),0) + 1
@@ -40,8 +58,14 @@
 
  function remove(id) {
    const userIndex = data.items.findIndex((user) => user.id == id);
+   if(itemIndex == -1) 
+    throw {
+            isSucess: false, 
+            message: "User not found", 
+            id: id
+          };
    data.items.splice(userIndex, 1);
-   return { success: true, message: "User deleted", id: id };
+   return { isSucess: true, message: "User deleted", id: id };
  }
 
  module.exports = {

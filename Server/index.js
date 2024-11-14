@@ -32,6 +32,13 @@ app
     res.sendFile(__dirname + "/dist/index.html")//asking for any resource and not handled by anything, just give it index.html
   })
 
+  //Error Handling
+  //whats different about this app use is that it uses 4 parameters so it's an error handler
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(err.status ?? 500).send(err); //when java gets to send it sends json back
+  })
+
 /*This is an Asynchronous function.Once pipeline is set up, last thing to do is listen? 
 anytime see num in the middle of the code its a magin num
 compiler (can't figure out if they're right or if they're wrong)

@@ -2,12 +2,12 @@
  */
 
 export interface DataEnvelope<T> {
-    data: T;
-    error?: string;
+    data: T
+    message?: string
+    isSuccess: boolean
 }
 
 export interface DataListEnvelope<T> extends DataEnvelope<T[]> {
   data: T[]
   total: number
-  error?: string
 }

@@ -6,7 +6,7 @@ const app = express.Router();/*almost axactly the same as the default we get fro
 app
   .get("/", (req, res, next) => {
     //user response obj to send
-    res.send(model.getAll());
+    res.send(await model.getAll());
   })
 
   /*make a locol variable id that points to the */
@@ -29,8 +29,10 @@ app
 
   .delete("/:id", (req, res, next) => {
     const id = req.params.id;
-    const ret = model.remove(+id);
-    res.send(ret);
+    model
+        .remove(+id)
+        .then((x)->res.send(x))
+        .catch(next)
   });
 
 /*after added these possible finctions, we need to export them, and will be able to import them in the
