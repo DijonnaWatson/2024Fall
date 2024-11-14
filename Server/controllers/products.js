@@ -21,9 +21,7 @@ app
   /*make a locol variable id that points to the */
   .get("/:id", (req, res, next) => {
     const id = req.params.id;
-    const user = model.get(
-      +id
-    ); /*find calls this function once for every item in items */
+    const user = model.get(+id); /*find calls this function once for every item in items */
     res.send(user);
   })
 
@@ -40,12 +38,12 @@ app
 
   .delete("/:id", (req, res, next) => {
     const id = req.params.id;
-    const ret = model.remove(+id);
-    if(!ret){
-      next({message: "Product not found", status: 404})
-      return
+    try {
+      const ret = model.remove(+id);
+      res.send(ret);
+    } catch (err) {
+      next(err.message);
     }
-    res.send(ret);
   });
 
 /*after added these possible finctions, we need to export them, and will be able to import them in the
