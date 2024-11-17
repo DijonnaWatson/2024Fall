@@ -6,6 +6,7 @@
 const data = require("../data/products.json")
 
 /**
+ * @template T
  * @typedef {import("../../Client/src/models/dataEnvelope").DataEnvelope} DataEnvelope
  * @typedef {import("../../Client/src/models/dataEnvelope").DataListEnvelope} DataListEnvelope
  */
@@ -20,10 +21,10 @@ const data = require("../data/products.json")
  */
 async function getAll() {
     return {
-      isSuccess: true,
-      data: data.items,
-      total: data.items.length,
-    };
+        isSuccess: true,
+        data: data.items,
+        total: data.items.length,
+    }
 }
 
 /**
@@ -32,8 +33,8 @@ async function getAll() {
  * @returns {Promise<DataEnvelope<Product>>}
  */
 async function get(id) {
-    const data.items.find((user) => user.id == id)
-    return{
+    const item = data.items.find((user) => user.id == id)
+    return {
         isSuccess: !!item,
         data: item,
     }
@@ -48,9 +49,9 @@ async function add(user) {
     user.id = data.items.reduce((prev, x) => (x.id > prev ? x.id : prev), 0) + 1
     data.items.push(user)
     return {
-         isSuccess: true,
-          data: user 
-        }
+        isSuccess: true,
+        data: user,
+    }
 }
 
 /**
@@ -64,7 +65,7 @@ async function update(id, user) {
     Object.assign(userToUpdate, user)
     return {
         isSuccess: true,
-        data: userToUpdate
+        data: userToUpdate,
     }
 }
 
@@ -76,7 +77,7 @@ async function update(id, user) {
 async function remove(id) {
     const itemIndex = data.items.findIndex((user) => user.id == id)
     if (itemIndex === -1)
-        throw { isSuccess: false, message: "Item not found", data: id };
+        throw { isSuccess: false, message: "Item not found", data: id }
     data.items.splice(itemIndex, 1)
     return { isSuccess: true, message: "Item deleted", data: id }
 }

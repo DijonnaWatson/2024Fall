@@ -10,6 +10,13 @@ const productController = require("./controllers/products");
 const PORT= 3000;
 
 //Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 app.use(express.json())
 app.use(express.static(__dirname +"/dist"))//Static, is a middleware that takes a look at every request, way to make an actual web server
 
@@ -22,35 +29,35 @@ app
   .get("/", (req, res, next) => {
     res.send("Hello World");
   })
-  .get("/about", (req, res) => {
+  .get("/about", (req, res, next) => {
     res.send("About Us");
   })
   .use("/api/v1/users", userController)
   .use("/api/v1/products", productController)
 
   .get("*", (req, res, next) => {
-    res.sendFile(__dirname + "/dist/index.html")//asking for any resource and not handled by anything, just give it index.html
-  })
+    res.sendFile(__dirname + "/dist/index.html");//asking for any resource and not handled by anything, just give it index.html
+  });
+
 
   //Error Handling
   //whats different about this app use is that it uses 4 parameters so it's an error handler
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(err.status ?? 500).send(err); //when java gets to send it sends json back
-  })
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(err.status ?? 500).send(err)//when java gets to send it sends json back
+});
 
 /*This is an Asynchronous function.Once pipeline is set up, last thing to do is listen? 
 anytime see num in the middle of the code its a magin num
 compiler (can't figure out if they're right or if they're wrong)
  and computer don't know what the number means 
  the number should just be a CONSTANT obviously */
- console.log("Step #1")
-app.listen(PORT, (err,data) => {
-
-  console.log("Step #2")
-    console.log("Server is running at http://localhost:" + PORT)
-})
-console.log("Step #3")
+console.log("Step #1");
+app.listen(PORT, (err, data) => {
+  console.log("Step #2");
+  console.log("Server is running at http://localhost:" + PORT);
+});
+console.log("Step #3");
 
 /* Four types of async methods
   1.Node Style Callbacks

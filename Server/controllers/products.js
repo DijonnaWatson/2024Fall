@@ -15,35 +15,38 @@
 
 app
   .get("/", (req, res, next) => {
-    res.send(model.getAll());
+    model
+      .getAll()
+      .then((x) => res.send(x))
+      .catch(next);
   })
-
-  /*make a locol variable id that points to the */
   .get("/:id", (req, res, next) => {
     const id = req.params.id;
-    const user = model.get(+id); /*find calls this function once for every item in items */
-    res.send(user);
+    model
+      .get(+id)
+      .then((x) => res.send(x))
+      .catch(next);
   })
-
   .post("/", (req, res, next) => {
-    const user = model.add(req.body);
-    res.send(user);
+    model
+      .add(req.body)
+      .then((x) => res.send(x))
+      .catch(next);
   })
-
   .patch("/:id", (req, res, next) => {
     const id = req.params.id;
-    const user = model.update(+id, req.body);
-    res.send(user);
+    model
+      .update(+id, req.body)
+      .then((x) => res.send(x))
+      .catch(next);
   })
-
   .delete("/:id", (req, res, next) => {
     const id = req.params.id;
-    try {
-      const ret = model.remove(+id);
-      res.send(ret);
-    } catch (err) {
-      next(err.message);
-    }
+
+    model
+      .remove(+id)
+      .then((x) => res.send(x))
+      .catch(next);
   });
 
 /*after added these possible finctions, we need to export them, and will be able to import them in the
