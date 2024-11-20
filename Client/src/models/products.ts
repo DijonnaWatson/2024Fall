@@ -1,16 +1,28 @@
 
 import type { DataEnvelope, DataListEnvelope } from './dataEnvelope'
-import { rest } from './myFetch'
+import { api } from './myFetch'
 
 //fucntion that returns this objects, the items(30) and the total(theoretically number of items total)
 //returns a dataList envelope of 
 export async function getAll() {
-  return rest<DataListEnvelope<Product>>('http://localhost:3000/api/v1/products')
+  return api<DataListEnvelope<Product>>('products')
 }
 
-//should be gicing us the data 
-export async function getById(id: number) { 
-  return api<DataEnvelope>(`${id}`)
+//should be giving us the data 
+export async function getById(id: number) {
+  return api<DataEnvelope<Product>>(`products/${id}`)
+}
+
+export function create(product: Product) {
+  return api<DataEnvelope<Product>>('products', product)
+}
+
+export function update(product: Product) {
+  return api<DataEnvelope<Product>>(`products/${product.id}`, product, 'PATCH')
+}
+
+export function remove(id: number) {
+  return api<DataEnvelope<Product>>(`products/${id}`, undefined, 'DELETE')
 }
 
 interface Review {
