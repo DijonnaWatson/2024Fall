@@ -4,6 +4,9 @@
 
 /** @type {{ items: Product[] }} */
 const data = require("../data/products.json")
+// const dd = require("./supabase") or
+const {getConnection}= require("./supabase")
+const conn = getConnection()
 
 /**
  * @template T
@@ -20,10 +23,13 @@ const data = require("../data/products.json")
  * @returns {Promise<DataListEnvelope<Product>>}
  */
 async function getAll() {
+    const { data, error, count } = await conn
+    .from("products")
+    .select("*",{count:"estimated"})//* means get all the data in that field
     return {
         isSuccess: true,
-        data: data.items,
-        total: data.items.length,
+        data: data,
+        total: count,
     }
 }
 
@@ -53,7 +59,6 @@ async function add(user) {
         data: user,
     }
 }
-
 /**
  * Update a user
  * @param {number} id
@@ -61,11 +66,11 @@ async function add(user) {
  * @returns {Promise<DataEnvelope<Product>>}
  */
 async function update(id, user) {
-    const userToUpdate = get(id)
-    Object.assign(userToUpdate, user)
+    const userToUpdate = await get(id)
+    Object.assign(userToUpdate.data, user)
     return {
         isSuccess: true,
-        data: userToUpdate,
+        data: userToUpdate.data,
     }
 }
 
