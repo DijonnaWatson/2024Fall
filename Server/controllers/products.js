@@ -47,6 +47,12 @@ app
       .remove(+id)
       .then((x) => res.send(x))
       .catch(next);
+  })
+  .post("/seed", (req, res, next) => {
+    model
+      .seed()
+      .then((x) => res.send(x))
+      .catch(next);
   });
 
 /*after added these possible finctions, we need to export them, and will be able to import them in the
