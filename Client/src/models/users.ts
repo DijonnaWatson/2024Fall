@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+import { loadScript } from './myFetch'
 
 export class User {
   id?: number
