@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { loadScript } from './myFetch'
+import { loadScript, rest } from './myFetch'
 
 export class User {
   id?: number
@@ -28,6 +28,7 @@ export class User {
   role: string = 'admin'
 }
 
+//centralized place to keep track of the users
 const session = ref({
   user: null as User | null,
   token: '',
@@ -53,22 +54,24 @@ export const useLogin = () => ({
         if (response.access_token) {
           session.value.token = response.access_token
 
-          /*    
-          console.log(googleUser)
+          const googleUser = await rest<any>(
+            'https://www.googleapis.com/oauth2/v1/userinfo?alt=json', undefined, 'GET', {
+              "Authorization": `Bearer ${response.access_token}`  
+            })
+             
+            console.log(googleUser)
               session.value.user = {
                 firstName: googleUser.given_name,
                 lastName: googleUser.family_name,
                 email: googleUser.email
+                image: googleUser.picture
               }
 
-              console.log(session.value.user)
-            }
-          })
-            */
-        }
+             console.log(session.value.user)
+         }
       }
     })
-
+            
     tokenClient.requestAccessToken({})
   }
 })
