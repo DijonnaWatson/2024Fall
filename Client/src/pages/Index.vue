@@ -4,7 +4,7 @@
 
 <template>
   <main>
-    <h1>Home</h1>
+    <h1 class="title">Home</h1>
     <p>Welcome to your Vue.js app!</p>
   </main>
 </template>

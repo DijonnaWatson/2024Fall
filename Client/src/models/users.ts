@@ -75,3 +75,17 @@ export const useLogin = () => ({
     tokenClient.requestAccessToken({})
   }
 })
+
+export async function getGoogleContacts() {
+  const contacts = await rest<any>('https://www.google.com/m8/feeds/contacts/default/full?alt=json', undefined, 'GET', {
+    "Authorization": `Bearer ${session.value.token}`
+  })
+
+  console.log(contacts)
+  return contacts
+}
+
+
+export async function getGooglePhotos() {
+  const photos = await rest<any>('https://photoslibrary.googleapis.com/v1/albums', undefined, 'GET',
+    
